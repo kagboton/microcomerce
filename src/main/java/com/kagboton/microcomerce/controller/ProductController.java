@@ -21,13 +21,13 @@ public class ProductController {
     private ProductDao productDao;
 
     //produits
-    /*@GetMapping(value="produits")
+    @GetMapping(value="produits")
     public List<Product> listeProduit(){
         return productDao.findAll();
-    }*/
+    }
 
     //Récupérer la liste des produits
-    @RequestMapping(value = "/produits", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/produits", method = RequestMethod.GET)
     public MappingJacksonValue listeProduits() {
 
         List<Product> produits = productDao.findAll();
@@ -41,23 +41,23 @@ public class ProductController {
         produitsFiltres.setFilters(listDeNosFiltres);
 
         return produitsFiltres;
-    }
+    }*/
 
     //produits/{id}
     @GetMapping(value = "produits/{id}")
     public Product afficherUnProduit(
             @PathVariable int id
     ){
-        return productDao.findByID(id);
+        return productDao.findById(id);
     }
 
     //produit
     @PostMapping(value = "produit")
     public ResponseEntity<Void> ajouterProduit(
             @RequestBody Product product
-    ){
+    ) {
         Product product1 = productDao.save(product);
-        if (product1 == null){
+        if (product1 == null) {
             return ResponseEntity.noContent().build();
         }
 
@@ -68,4 +68,32 @@ public class ProductController {
                 .toUri();
         return ResponseEntity.created(location).build();
     }
+
+    /*@GetMapping(value = "test/produits/{prixLimit}")
+    public List<Product> testDeRequete(@PathVariable int prixLimit){
+        return productDao.findByPrixGreaterThan(400);
+    }*/
+
+    @GetMapping(value = "test/produits/{prixLimit}")
+    public List<Product> testDeRequeteBis(@PathVariable int prixLimit){
+        return productDao.chercherUnProduitCher(prixLimit);
+    }
+
+
+    @GetMapping(value = "testMot/produits/{recherche}")
+    public List<Product> testeDeRequeteBisBis(@PathVariable String recherche) {
+        return productDao.findByNomLike("%"+recherche+"%");
+    }
+
+    @DeleteMapping(value = "/produits/{id}")
+    public void supprimerProduit(@PathVariable int id) {
+        productDao.delete(productDao.findById(id));
+    }
+
+    @PutMapping (value = "/produits")
+    public void updateProduit(@RequestBody Product product) {
+        productDao.save(product);
+    }
+
+
 }

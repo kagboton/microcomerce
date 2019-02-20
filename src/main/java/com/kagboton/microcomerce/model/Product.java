@@ -4,8 +4,15 @@ import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonFilter("monFiltreDynamique")
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+
+//@JsonFilter("monFiltreDynamique")
+@Entity
 public class Product {
+    @Id
+    @GeneratedValue
     private int id;
     private String nom;
     private int prix;
