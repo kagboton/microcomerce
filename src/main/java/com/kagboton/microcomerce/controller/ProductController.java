@@ -1,14 +1,12 @@
 package com.kagboton.microcomerce.controller;
 
-import com.fasterxml.jackson.databind.ser.FilterProvider;
-import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
-import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.kagboton.microcomerce.dao.ProductDao;
 import com.kagboton.microcomerce.exceptions.ProduitIntrouvableException;
 import com.kagboton.microcomerce.model.Product;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -16,6 +14,7 @@ import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
+@Api(description = "Gestion des produits")
 @RestController
 public class ProductController {
 
@@ -46,6 +45,7 @@ public class ProductController {
     }*/
 
     //produits/{id}
+    @ApiOperation(value = "Récupère un produit selon son ID")
     @GetMapping(value = "produits/{id}")
     public Product afficherUnProduit(
            @PathVariable int id
@@ -59,7 +59,7 @@ public class ProductController {
     }
 
     //produit
-    @PostMapping(value = "produit")
+    @PostMapping(value = "produits")
     public ResponseEntity<Void> ajouterProduit(
             @Valid @RequestBody Product product
     ) {
