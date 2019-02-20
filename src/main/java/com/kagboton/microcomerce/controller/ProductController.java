@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ser.FilterProvider;
 import com.fasterxml.jackson.databind.ser.impl.SimpleBeanPropertyFilter;
 import com.fasterxml.jackson.databind.ser.impl.SimpleFilterProvider;
 import com.kagboton.microcomerce.dao.ProductDao;
+import com.kagboton.microcomerce.exceptions.ProduitIntrouvableException;
 import com.kagboton.microcomerce.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.http.converter.json.MappingJacksonValue;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 
@@ -46,15 +48,20 @@ public class ProductController {
     //produits/{id}
     @GetMapping(value = "produits/{id}")
     public Product afficherUnProduit(
-            @PathVariable int id
-    ){
-        return productDao.findById(id);
+           @PathVariable int id
+    )throws ProduitIntrouvableException{
+        Product product =  productDao.findById(id);
+
+        if(product == null) {
+            throw new ProduitIntrouvableException("Le produit avec l'id " +id+ " est introuvable");
+        }
+        return product;
     }
 
     //produit
     @PostMapping(value = "produit")
     public ResponseEntity<Void> ajouterProduit(
-            @RequestBody Product product
+            @Valid @RequestBody Product product
     ) {
         Product product1 = productDao.save(product);
         if (product1 == null) {

@@ -3,6 +3,7 @@ package com.kagboton.microcomerce.model;
 import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,6 +15,8 @@ public class Product {
     @Id
     @GeneratedValue
     private int id;
+
+    @Length(min = 3, max = 25)
     private String nom;
     private int prix;
 
