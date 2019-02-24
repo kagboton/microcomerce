@@ -1,4 +1,4 @@
-package com.mclientui.mclientui;
+package com.mclientui;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

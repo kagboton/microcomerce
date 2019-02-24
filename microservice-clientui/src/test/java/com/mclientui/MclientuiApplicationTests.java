@@ -1,4 +1,6 @@
-package com.mclientui.mclientui;
+/*
+package com.mclientui;
+
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -14,3 +16,4 @@ public class MclientuiApplicationTests {
 	}
 
 }
+*/
