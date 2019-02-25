@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Mcommerce</title>
@@ -11,8 +11,16 @@
 
         <h1>Application Mcommerce</h1>
 
-    </div>
+        <div class="row">
+            <div th:each="produit : ${produits}" class="col-md-4 my-1">
+                <a th:href="@{|/Produits/${produit.id}|}" >
+                    <img th:src="${produit.image}"  class="card-img-top" />
+                    <p th:text= "${produit.titre}"></p>
+                </a>
+            </div>
+        </div>
 
+    </div>
 </body>
 
 <script type="text/javascript" src="webjars/bootstrap/4.0.0-2/js/bootstrap.min.js"></script>
