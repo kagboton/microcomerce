@@ -1,0 +1,7 @@
+//todo
+
+externalsier la config pour commande et paiement
+lancer un post sur le actuator pour actualiser la config
+
+
+//finir
