@@ -8,7 +8,6 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
 @EnableFeignClients("com.mclientui")
-@EnableDiscoveryClient
 public class MclientuiApplication {
 
 	public static void main(String[] args) {
